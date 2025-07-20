@@ -29,9 +29,13 @@ public class Login {
 
                     if (rs.next()) {
                         JOptionPane.showMessageDialog(null, "Bienvenido " + user);
+                        JFrame ventanaLogin = (JFrame) SwingUtilities.getWindowAncestor(validarButton);
+                        ventanaLogin.dispose();
+
                         JFrame frame = new JFrame("Registrar Pacientes");
                         frame.setContentPane(new RegistrarPacientes().getPanel());
                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
                         frame.pack();
                         frame.setVisible(true);
                     } else {

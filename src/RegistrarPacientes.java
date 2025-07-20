@@ -41,6 +41,36 @@ public class RegistrarPacientes {
                 }
             }
         });
+        busquedaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener la ventana actual
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(busquedaButton);
+
+                // Cerrar la ventana actual
+                ventanaActual.dispose();
+
+                // Abrir nueva ventana (Busqueda)
+                JFrame nuevaVentana = new JFrame("Buscar Pacientes");
+                nuevaVentana.setContentPane(new Busqueda().getPanel());
+                nuevaVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                nuevaVentana.pack();
+                nuevaVentana.setVisible(true);
+            }
+        });
+        regresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(regresarButton);
+                ventanaActual.dispose();
+
+                JFrame nuevaVentana = new JFrame("Login");
+                nuevaVentana.setContentPane(new Login().getPanel());
+                nuevaVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                nuevaVentana.pack();
+                nuevaVentana.setVisible(true);
+            }
+        });
     }
     public JPanel getPanel() {
         return principal;

@@ -43,7 +43,28 @@ public class Busqueda {
         registroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(registroButton);
+                ventanaActual.dispose();
 
+                JFrame nuevaVentana = new JFrame("Registrar Pacientes");
+                nuevaVentana.setContentPane(new RegistrarPacientes().getPanel());
+                nuevaVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                nuevaVentana.pack();
+                nuevaVentana.setVisible(true);
+
+            }
+        });
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor(loginButton);
+                ventanaActual.dispose();
+
+                JFrame nuevaVentana = new JFrame("Login");
+                nuevaVentana.setContentPane(new Login().getPanel());
+                nuevaVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                nuevaVentana.pack();
+                nuevaVentana.setVisible(true);
             }
         });
     }
