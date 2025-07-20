@@ -15,16 +15,25 @@ public class RegistrarPacientes {
     private JButton regresarButton;
     private JButton registrarButton;
     private JPanel principal;
+    private JTextField cedula;
 
     public RegistrarPacientes() {
         registrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String ced = cedula.getText().trim();  // eliminamos espacios
+
+                // Validar que no esté vacía
+                if (ced.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese la cédula del paciente", "Cédula requerida", JOptionPane.WARNING_MESSAGE);
+                    return; // Detener el proceso de guardado
+                }
+
                 try {
                     Connection con = Conexion.getConexion();
                     String sql = "INSERT INTO PACIENTE (cedula, n_historial_clinico, nombre, apellido, telefono, edad, descripcion_enfermedad) VALUES (?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement stmt = con.prepareStatement(sql);
-                    stmt.setString(1, historialClinico.getText()); // reemplaza con un campo de cédula si lo agregas
+                    stmt.setString(1, ced);
                     stmt.setInt(2, Integer.parseInt(historialClinico.getText()));
                     stmt.setString(3, nombre.getText());
                     stmt.setString(4, apellido.getText());
@@ -33,7 +42,7 @@ public class RegistrarPacientes {
                     stmt.setString(7, descripcion.getText());
 
                     stmt.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Paciente registrado");
+                    JOptionPane.showMessageDialog(null, "Paciente registrado correctamente");
                     con.close();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -68,6 +77,7 @@ public class RegistrarPacientes {
                 nuevaVentana.setContentPane(new Login().getPanel());
                 nuevaVentana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 nuevaVentana.pack();
+                nuevaVentana.setLocationRelativeTo(null);
                 nuevaVentana.setVisible(true);
             }
         });

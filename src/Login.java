@@ -13,6 +13,7 @@ public class Login {
     private JButton validarButton;
 
     public Login() {
+
         validarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -35,7 +36,7 @@ public class Login {
                         JFrame frame = new JFrame("Registrar Pacientes");
                         frame.setContentPane(new RegistrarPacientes().getPanel());
                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+                        frame.setLocationRelativeTo(null);
                         frame.pack();
                         frame.setVisible(true);
                     } else {
